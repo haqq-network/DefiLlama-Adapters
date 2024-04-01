@@ -784,6 +784,8 @@ async function sumTokens2({
     })
   }
 
+  console.log('sumTokens2', tokensAndOwners, chain, block, transformAddress, resolveLP, unwrapAll, blacklistedLPs, skipFixBalances, abis, permitFailure, sumChunkSize)
+
   await sumTokens(balances, tokensAndOwners, block, chain, transformAddress, { resolveLP, unwrapAll, blacklistedLPs, skipFixBalances: true, abis, permitFailure, sumChunkSize, })
 
   if (ichiVaultToAs.length)

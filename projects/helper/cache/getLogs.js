@@ -8,17 +8,30 @@ const cacheFolder = 'logs'
 async function getLogs({ target,
   topic, keys = [], fromBlock, toBlock, topics,
   api, eventAbi, onlyArgs = false, extraKey, skipCache = false, onlyUseExistingCache = false, customCacheFunction,  skipCacheRead = false}) {
+  console.log('getLogs #1')
+  
   if (!api) throw new Error('Missing sdk api object!')
   if (!target) throw new Error('Missing target!')
   if (!fromBlock) throw new Error('Missing fromBlock!')
+
+  console.log('getLogs #2')
+
+  await api.getChainId()
+
+  // console.log(`api.chain: ${JSON.stringify(api)}`)
+    
   if (onlyUseExistingCache)
     toBlock = 1e11
   else
     await api.getBlock()
+
+  console.log('getLogs #3')
   const block = api.block
   const chain = api.chain ?? 'ethereum'
   if (!toBlock) toBlock = block
   if (!toBlock) throw new Error('Missing fromBlock!')
+
+  console.log(`FETCHING LOGS: ${target} ${fromBlock} ${toBlock}`)
 
   let iface
 

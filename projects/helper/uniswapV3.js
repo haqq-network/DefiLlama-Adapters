@@ -23,6 +23,8 @@ function uniV3Export(config) {
 
     exports[chain] = {
       tvl: async (api) => {
+        // console.log(`!!! Fetching Uniswap V3 TVL !!!`)
+
         const logs = await getLogs({
           api,
           target,
@@ -31,6 +33,8 @@ function uniV3Export(config) {
           eventAbi,
           onlyArgs: true,
         })
+
+        console.log(`!!! LOGS !!!`);
 
         if (filterFn) 
           blacklistedTokens.push(... await filterFn(api, logs))
